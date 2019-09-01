@@ -58,3 +58,10 @@ We will examine four different error-correcting codes:
 3. Reed-Solomon codes
 4. Low-Density Parity Check codes
 
+## 3.5 EXAMPLE DATA LINK PROTOCOLS
+
+### 3.5.1 Packet over SONET
+
+1. A framing method that unambiguously delineates the end of one frame and the start of the next one. The frame format also handles error detection.
+2. A link control protocol for bringing lines up, testing them, negotiating options, and bringing them down again gracefully when they are no longer needed. This protocol is called **LCP** (Link Control Protocol).
+3. A way to negotiate network-layer options in a way that is independent of the network layer protocol to be used. The method chosen isto have a different **NCP** (**Network Control Protocol**) for each network layer supported.
