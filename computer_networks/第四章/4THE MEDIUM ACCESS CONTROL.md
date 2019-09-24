@@ -1,3 +1,7 @@
+---
+typora-root-url: ..\images
+---
+
 # 4 THE MEDIUM ACCESS CONTROL SUBLAYER 
 
 ​	In any broadcast network, the key issue is how to determine who gets to use  the channel when there is competition for it.
@@ -88,6 +92,103 @@ CSMA/CD媒体访问控制方法的工作原理，可以概括如下：
 An early and influential protocol that tackles these problems for wireless LANs is MACA (**Multiple Access with Collision Avoidance避免冲突的多路访问**) (Karn, 1990). 
 
 ## 4.3 ETHERNET 
+
+### 4.3.1 Classic Ethernet Physical Layer 
+
+​	Each version of Ethernet has a maximum cable length per segment (i.e., unamplified length) over which the signal will propagate. To allow larger networks, multiple cables can be connected by **repeaters（中继器）**. 
+
+**4.3.2 Classic Ethernet MAC Sublayer Protocol（经典MAC网子层协议)**
+
+![经典网络mac子层协议](/forth/经典网络mac子层协议.jpg)
+
+**CSMA/CD with Binary Exponential Backoff (二进制指数回退的CSMA/CD)**
+
+​	Let us now see how the random interval is determined when a collision  occurs, as it is a new method. The model is still that of Fig. 4-5. After a collision,  time is divided into discrete slots whose length is equal to the worst-case round trip propagation time on the ether (2τ). To accommodate the longest path allowed by Ethernet, the slot time has been set to 512 bit times, or 51.2 μsec.  After the first collision, each station waits either 0 or 1 slot times at random  before trying again. If two stations collide and each one picks the same random  number, they will collide again. After the second collision, each one picks either  0, 1, 2, or 3 at random and waits that number of slot times. If a third collision  occurs (the probability of this happening is 0.25), the next time the number of  slots to wait is chosen at random from the interval 0 to 2^(3 − 1).
+
+​	In general, after i collisions, a random number between 0 and 2^(i − 1) is chosen,  and that number of slots is skipped. However, after 10 collisions have been  reached, the randomization interval is frozen at a maximum of 1023 slots. After  16 collisions, the controller throws in the towel and reports failure back to the  computer. Further recovery is up to higher layers.
+
+​	If there is no collision, the sender assumes that the frame was probably successfully delivered. That is, neither CSMA/CD nor Ethernet provides acknowledgements. This choice is appropriate for wired and optical fiber channels that have low error rates. Any errors that do occur must then be detected by the CRC and recovered by higher layers. For wireless channels that have more errors, we will see that acknowledgements are used.
+
+### 4.3.4 Switched Ethernet 
+
+However, if the cable is half duplex, the station and the port must contend for  transmission with CSMA/CD in the usual way. （why????）
+
+### 4.3.5 Fast Ethernet 
+
+### 4.3.6 Gigabit Ethernet 
+
+### 4.3.7 10-Gigabit Ethernet 
+
+### 4.3.8 Retrospective on Ethernet 
+
+## 4.4 WIRELESS LANS 
+
+### 4.4.1 The 802.11 Architecture and Protocol Stack 
+
+802.11 networks can be used in two modes:
+
+1. In infrastructure mode, each client is associated with an AP (Access Point) that is in turn connected to the other network
+2. The other mode, shown in Fig. 4-23(b), is an ad hoc network(自组织网络). 
+
+![2modelsOfWirelessNetwork](/forth/2modelsOfWirelessNetwork.jpg)
+
+
+
+### 4.4.2 The 802.11 Physical Layer 
+
+### 4.4.3 The 802.11 MAC Sublayer Protocol 
+
+​	Instead, 802.11 tries to avoid collisions with a protocol called CSMA/CA (CSMA with Collision Avoidance). This protocol is conceptually similar to Ethernet’s CSMA/CD, with channel sensing before sending and exponential back off after collisions.
+
+​	Compared to Ethernet, there are two main differences. First, starting backoffs early helps to avoid collisions. The second problem is that the transmission ranges of different stations may be different.
+
+​	CSMA/CA with physical and virtual sensing is the core of the 802.11 protocol. However, there are several other mechanisms that have been developed to go with it. Each of these mechanisms was driven by the needs of real operation, so we will look at them briefly. 
+
+1. The first need we will look at is reliability.  
+2. The second need we will discuss is saving power.  **beacon frames **  **APSD (Automatic Power Save Delivery)**
+3. The third and last need we will examine is quality of service 
+
+
+
+![间隔时间定义](/forth/间隔时间定义.jpg)
+
+
+
+### 4.4.4 The 802.11 Frame Structure 
+
+​	The 802.11 standard defines three different classes of frames in the air: data, control, and management.
+
+![802.11数据帧结构](/forth/802.11数据帧结构.jpg)
+
+
+
+### 4.4.5 Services 
+
+​	The 802.11 standard defines the services that the clients, the access points, and the network connecting them must be a conformant wireless LAN. These services cluster into several groups.
+
+1. **The association service (关联服务)** is used by mobile stations to connect themselves to APs.
+2. **Reassociation(重新连接)** lets a station change its preferred AP 
+3. Once frames reach the AP, the **distribution service** determines how to route them.
+4. Data transmission is what it is all about, so 802.11 naturally provides a **data delivery service** .
+5. Wireless is a broadcast signal. For information sent over a wireless LAN to  be kept confidential, it must be encrypted. This goal is accomplished with a  **privacy service** that manages the details of encryption and decryption.
+6. To handle traffic with different priorities, there is a **QOS traffic scheduling  service**.
+7. Finally, there are two services that help stations manage their use of the spectrum. The transmit power control service gives stations the information they  need to meet regulatory limits on transmit power that vary from region to region.  The dynamic frequency selection service give stations the information they need  to avoid transmitting on frequencies in the 5-GHz band that are being used for  radar in the proximity.
+
+## 4.8 数据联络层交换
+
+网桥通过泛洪算法(Flooding Algorithm) 以及后向学习法对带来的帧进行路由。
+
+网桥的路由转换方式被称为直通式交换（Cut-through switching）或虫孔路由（wormhole routing）
+
+网桥之间的通讯通过生成树解决环路问题
+
+
+
+
+
+
+
+
 
 
 
